@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExoLife: Beyond Our Sun | My Planet Lab</title>
+  
+  <!-- Global & Page-Specific Stylesheets -->
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/lab.css">
+</head>
+<body>
+
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="site-nav-container">
+      <a href="index.html" class="site-logo">
+        Exo<span>Life</span>
+      </a>
+      
+      <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="hamburger-icon" aria-hidden="true"></span>
+      </button>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links-list">
+          <li><a href="index.html" class="nav-link-item">Home</a></li>
+          <li><a href="calculator.html" class="nav-link-item">Planet Builder</a></li>
+          <li><a href="worlds.html" class="nav-link-item">Worlds Beyond</a></li>
+          <li><a href="astronomy-guide.html" class="nav-link-item">Astrobiology Guide</a></li>
+          <li><a href="methods.html" class="nav-link-item">Detection Methods</a></li>
+          <li><a href="lab.html" class="nav-link-item" aria-current="page">My Lab</a></li>
+          <li><a href="about.html" class="nav-link-item">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Landmark -->
+  <main class="lab-main-container">
+    
+    <!-- Lab Header Banner -->
+    <section class="lab-hero-section">
+      <div class="lab-hero-content">
+        <h1>My Planetary Laboratory</h1>
+        <p>Review, analyze, and manage all the custom worlds you've engineered in the habitability simulator.</p>
+      </div>
+      <div class="lab-actions-bar">
+        <span id="saved-count-badge" class="saved-counter">0 Worlds Saved</span>
+        <button id="clear-all-btn" class="secondary-action-button danger-button">Clear All Lab Data</button>
+      </div>
+    </section>
+
+    <!-- Saved Planets Grid / Empty State Container -->
+    <section class="saved-worlds-section" aria-label="Saved Custom Worlds">
+      <div id="saved-planets-grid" class="planets-grid">
+        <!-- Dynamically injected via lab-storage.js -->
+      </div>
+
+      <!-- Empty State Template (Hidden by default when items exist) -->
+      <div id="empty-lab-state" class="empty-state-card" style="display: none;">
+        <div class="empty-icon" aria-hidden="true">🌌</div>
+        <h2>Your Laboratory is Empty</h2>
+        <p>You haven't saved any custom worlds yet. Head over to the Planet Builder simulator, tweak stellar parameters, and save your favorite discoveries here!</p>
+        <a href="calculator.html" class="primary-action-button">Launch Planet Builder</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="footer-content-wrapper">
+      <p>&copy; 2026 ExoLife: Beyond Our Sun. Made accessible for cosmic explorers everywhere.</p>
+      <p>Empowering public understanding of astrobiology through open web standards.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/lab-storage.js"></script>
+</body>
+</html>
