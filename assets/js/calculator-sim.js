@@ -43,6 +43,53 @@ document.addEventListener('DOMContentLoaded', () => {
     orbitAngle: 0
   };
 
+  // ===================================================================== */
+  // CHECK FOR LAB-LOADED PLANET OR FALLBACK TO DEFAULTS                   */
+  // ===================================================================== */
+  const activeSimulationPlanetJson = localStorage.getItem('exolife_active_simulation_planet');
+  if (activeSimulationPlanetJson) {
+    try {
+      const activePlanet = JSON.parse(activeSimulationPlanetJson);
+      
+      // Match star type key based on stored star name string
+      let matchedStarKey = 'k-type';
+      if (activePlanet.starType.includes('M-Dwarf')) matchedStarKey = 'm-dwarf';
+      else if (activePlanet.starType.includes('G-Type')) matchedStarKey = 'g-type';
+      else if (activePlanet.starType.includes('F-Type')) matchedStarKey = 'f-type';
+      else if (activePlanet.starKey) matchedStarKey = activePlanet.starKey; // Fallback match
+
+      // 1. Explicitly update simulationState with the saved planet's parameters
+      simulationState.starKey = matchedStarKey;
+      simulationState.planetRadius = parseFloat(activePlanet.radius);
+      simulationState.atmosphere = parseFloat(activePlanet.atmosphere);
+      simulationState.orbitalDistance = parseFloat(activePlanet.distance);
+
+      // 2. Synchronize UI form inputs and sliders to match the state
+      starTypeSelect.value = matchedStarKey;
+      starDescription.textContent = starDatabase[matchedStarKey].desc;
+      
+      planetRadiusSlider.value = activePlanet.radius;
+      planetRadiusOutput.textContent = `${activePlanet.radius} R⊕`;
+      
+      atmosphereSlider.value = activePlanet.atmosphere;
+      atmosphereOutput.textContent = `${activePlanet.atmosphere} atm`;
+      
+      orbitalDistanceSlider.value = activePlanet.distance;
+      orbitalDistanceOutput.textContent = `${activePlanet.distance} AU`;
+      
+      const planetNameInput = document.getElementById('planet-name-input');
+      if (planetNameInput) planetNameInput.value = activePlanet.name;
+
+      // Mission log notification
+      missionLogText.textContent = `Telemetry synchronized: Loaded "${activePlanet.name}" from your Lab.`;
+
+      // Clear the temporary active item so future page refreshes revert to default
+      localStorage.removeItem('exolife_active_simulation_planet');
+    } catch (err) {
+      console.error('Error loading active simulation planet:', err);
+    }
+  }
+
   // Resize canvas to fit container high-DPI crispness
   function resizeCanvas() {
     const parentContainer = canvas.parentElement;
@@ -251,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const results = computeAstrophysics();
       const customPlanet = {
         id: 'planet_' + Date.now(),
-        name: `World-${Math.floor(Math.random() * 900) + 100}`,
+        name: document.getElementById('planet-name-input').value.trim() || 'Unnamed World',
         starType: starDatabase[simulationState.starKey].name,
         radius: simulationState.planetRadius,
         distance: simulationState.orbitalDistance,
