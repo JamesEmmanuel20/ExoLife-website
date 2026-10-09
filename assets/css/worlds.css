@@ -1,0 +1,248 @@
+/* ===================================================================== */
+/* EXOLIFE: BEYOND OUR SUN - EXOPLANET GALLERY STYLES                   */
+/* ===================================================================== */
+
+.worlds-main-container {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: var(--site-padding-block) var(--site-padding-inline);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  min-height: calc(100vh - 140px);
+}
+
+.worlds-hero-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--space-border-color);
+  padding-bottom: 2rem;
+}
+
+.worlds-hero-content h1 {
+  font-size: var(--font-size-heading-1);
+  margin-bottom: 0.5rem;
+}
+
+.worlds-hero-content p {
+  color: var(--text-color-secondary);
+  font-size: var(--font-size-body);
+  max-width: 700px;
+}
+
+/* Filter Controls & Chips */
+.worlds-filter-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filter-chips-container {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  background-color: rgba(15, 22, 41, 0.6);
+  border: 1px solid var(--space-border-color);
+  color: var(--text-color-secondary);
+  padding: 0.5rem 1.15rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  backdrop-filter: blur(8px);
+}
+
+.filter-chip:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  color: var(--text-color-primary);
+}
+
+.filter-chip.active {
+  background-color: rgba(56, 189, 248, 0.15);
+  border-color: var(--text-color-accent);
+  color: var(--text-color-accent);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+}
+
+/* Catalog Grid & Planet Cards */
+.planets-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+.exoplanet-catalog-card {
+  background-color: var(--space-surface-card);
+  border: 1px solid var(--space-border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-align: center;
+}
+
+.exoplanet-catalog-card:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px -10px rgba(56, 189, 248, 0.2);
+}
+
+.card-canvas-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgba(7, 9, 19, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+}
+
+.card-planet-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.card-planet-info h3 {
+  font-size: 1.15rem;
+  color: var(--text-color-primary);
+}
+
+.card-star-tag {
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+}
+
+.card-status-badge {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-habitable { background: rgba(16, 185, 129, 0.15); color: var(--habitability-green-glow); border: 1px solid rgba(16, 185, 129, 0.3); }
+.status-scorched { background: rgba(239, 68, 68, 0.15); color: var(--habitability-red-warning); border: 1px solid rgba(239, 68, 68, 0.3); }
+.status-frozen { background: rgba(59, 130, 246, 0.15); color: var(--habitability-blue-cold); border: 1px solid rgba(59, 130, 246, 0.3); }
+.status-toohot { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+/* Comparison Modal Styling */
+.space-modal {
+  background-color: var(--space-surface-card);
+  border: 1px solid var(--space-border-color);
+  border-radius: 16px;
+  color: var(--text-color-primary);
+  max-width: 650px;
+  width: 90%;
+  padding: 2rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+.space-modal::backdrop {
+  background-color: rgba(7, 9, 19, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.close-modal-icon {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-color-secondary);
+  font-size: 1.75rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.close-modal-icon:hover {
+  color: var(--text-color-primary);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.comparison-display-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  background-color: rgba(7, 9, 19, 0.4);
+  padding: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid var(--space-border-color);
+}
+
+.comparison-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.comparison-column h3 {
+  font-size: 0.9rem;
+  color: var(--text-color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.modal-canvas-wrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: var(--space-background-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--space-border-color);
+}
+
+.modal-description-text {
+  font-size: 0.9rem;
+  color: var(--text-color-secondary);
+  line-height: 1.5;
+  background-color: rgba(15, 22, 41, 0.5);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--text-color-accent);
+}
+
+.modal-footer-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+  .comparison-display-grid {
+    grid-template-columns: 1fr;
+  }
+}
