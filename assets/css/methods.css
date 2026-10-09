@@ -1,0 +1,240 @@
+/* ===================================================================== */
+/* EXOLIFE: BEYOND OUR SUN - DETECTION METHODS STYLES                    */
+/* ===================================================================== */
+
+.methods-main-container {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: var(--site-padding-block) var(--site-padding-inline);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.methods-hero-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.methods-hero-section h1 {
+  font-size: var(--font-size-heading-1);
+}
+
+.methods-hero-section p {
+  color: var(--text-color-secondary);
+  font-size: 1.1rem;
+}
+
+/* Explainer Grid */
+.methods-explainer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+.method-card {
+  background-color: var(--space-surface-card);
+  border: 1px solid var(--space-border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.method-card:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.2);
+}
+
+.method-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.method-badge {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--text-color-accent);
+  background-color: rgba(56, 189, 248, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+
+.method-card h2 {
+  font-size: 1.25rem;
+}
+
+.method-card p {
+  color: var(--text-color-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.method-specs-list {
+  list-style: none;
+  padding: 0;
+  margin-top: auto;
+  border-top: 1px solid var(--space-border-color);
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+}
+
+.method-specs-list span {
+  color: var(--text-color-primary);
+  font-weight: 600;
+}
+
+/* Simulator Laboratory Section */
+.simulator-lab-section {
+  background-color: var(--space-surface-card);
+  border: 1px solid var(--space-border-color);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.lab-section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detector-workbench {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2rem;
+}
+
+.detector-controls-panel {
+  background-color: rgba(7, 9, 19, 0.4);
+  border: 1px solid var(--space-border-color);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.method-selector-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: rgba(7, 9, 19, 0.6);
+  border: 1px solid var(--space-border-color);
+  border-radius: 8px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.method-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-color-secondary);
+  padding: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.method-tab-btn.active {
+  background-color: rgba(56, 189, 248, 0.2);
+  color: var(--text-color-accent);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.slider-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.slider-control-group label {
+  font-size: 0.9rem;
+  color: var(--text-color-primary);
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-range-input {
+  width: 100%;
+  accent-color: var(--text-color-accent);
+  cursor: pointer;
+}
+
+.detector-help-text {
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+  background-color: rgba(15, 22, 41, 0.6);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--text-color-accent);
+  line-height: 1.5;
+}
+
+.detector-output-panel {
+  background-color: rgba(7, 9, 19, 0.6);
+  border: 1px solid var(--space-border-color);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.signal-canvas-wrapper {
+  background-color: var(--space-background-primary);
+  border-radius: 8px;
+  border: 1px solid var(--space-border-color);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signal-canvas-wrapper canvas {
+  width: 100%;
+  height: auto;
+}
+
+.signal-caption-text {
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .detector-workbench {
+    grid-template-columns: 1fr;
+  }
+}

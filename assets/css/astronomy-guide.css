@@ -1,0 +1,398 @@
+/* ===================================================================== */
+/* EXOLIFE: BEYOND OUR SUN - ASTROBIOLOGY GUIDE STYLES                   */
+/* ===================================================================== */
+
+.guide-main-container {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: var(--site-padding-block) var(--site-padding-inline);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  transition: background 0.8s ease;
+}
+
+.guide-hero-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.guide-hero-section h1 {
+  font-size: var(--font-size-heading-1);
+}
+
+.guide-hero-section p {
+  color: var(--text-color-secondary);
+  font-size: 1.1rem;
+}
+
+/* Scrollytelling Grid Layout */
+.scrolly-container {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+  position: relative;
+  align-items: start;
+  transition: --theme-accent 0.8s ease;
+}
+
+.scrolly-text-column {
+  display: flex;
+  flex-direction: column;
+  gap: 35vh;
+  padding-bottom: 20vh;
+}
+
+.scrolly-chapter-card {
+  background-color: var(--space-surface-card);
+  border: 1px solid var(--space-border-color);
+  border-radius: 16px;
+  padding: 2.5rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.4;
+  transform: translateY(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Water / Liquid sheen accent for Chapter 1 */
+.scrolly-chapter-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--card-ambient-glow, rgba(56, 189, 248, 0.05)) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.scrolly-chapter-card.active-chapter {
+  opacity: 1;
+  transform: translateY(0);
+  border-color: var(--active-border-color, rgba(56, 189, 248, 0.5));
+  box-shadow: 0 20px 40px -10px var(--active-shadow-color, rgba(56, 189, 248, 0.25));
+}
+
+.scrolly-chapter-card.active-chapter::after {
+  opacity: 1;
+}
+
+.chapter-number {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--text-color-accent);
+  background-color: rgba(56, 189, 248, 0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 1rem;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.scrolly-chapter-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.scrolly-chapter-card p {
+  color: var(--text-color-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.chapter-bullet-list {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-color-secondary);
+  font-size: 0.9rem;
+}
+
+/* Sticky Viewport Panel - Dynamic Theme Adaption */
+.scrolly-sticky-viewport {
+  position: sticky;
+  top: 100px;
+  height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+}
+
+.sticky-canvas-card {
+  width: 100%;
+  background-color: var(--space-surface-card);
+  border: 1px solid var(--space-border-color);
+  border-radius: 16px;
+  padding: 1.75rem;
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.6s ease, box-shadow 0.6s ease;
+}
+
+.viewport-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.live-indicator {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--habitability-green-glow);
+  letter-spacing: 0.05em;
+}
+
+.canvas-display-wrapper {
+  background-color: rgba(7, 9, 19, 0.7);
+  border-radius: 10px;
+  border: 1px solid var(--space-border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1rem;
+  transition: border-color 0.6s ease;
+}
+
+.canvas-display-wrapper canvas {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+}
+
+.viewport-caption-text {
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+  text-align: center;
+}
+
+/* ===================================================================== */
+/* THEMATIC STORYTELLING THEME MODIFIERS (Driven by JS Scroll State)     */
+/* ===================================================================== */
+
+/* Theme 1: Habitable / Water / Emerald-Aqua */
+.scrolly-container.theme-1 {
+  --active-border-color: rgba(16, 185, 129, 0.6);
+  --active-shadow-color: rgba(16, 185, 129, 0.2);
+  --card-ambient-glow: rgba(16, 185, 129, 0.08);
+}
+.scrolly-container.theme-1 .sticky-canvas-card {
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 20px 50px rgba(16, 185, 129, 0.1);
+}
+
+/* Theme 2: Solar / Fiery / Crimson-Amber */
+.scrolly-container.theme-2 {
+  --active-border-color: rgba(239, 68, 68, 0.6);
+  --active-shadow-color: rgba(239, 68, 68, 0.2);
+  --card-ambient-glow: rgba(239, 68, 68, 0.08);
+}
+.scrolly-container.theme-2 .sticky-canvas-card {
+  border-color: rgba(239, 68, 68, 0.3);
+  box-shadow: 0 20px 50px rgba(239, 68, 68, 0.1);
+}
+
+/* Theme 3: Prismatic / Cyan-Violet Spectroscopy */
+.scrolly-container.theme-3 {
+  --active-border-color: rgba(56, 189, 248, 0.6);
+  --active-shadow-color: rgba(56, 189, 248, 0.25);
+  --card-ambient-glow: rgba(56, 189, 248, 0.08);
+}
+.scrolly-container.theme-3 .sticky-canvas-card {
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 20px 50px rgba(56, 189, 248, 0.15);
+}
+
+/* Theme 4: Gravitational / Deep Indigo Core */
+.scrolly-container.theme-4 {
+  --active-border-color: rgba(129, 140, 248, 0.6);
+  --active-shadow-color: rgba(129, 140, 248, 0.25);
+  --card-ambient-glow: rgba(129, 140, 248, 0.08);
+}
+.scrolly-container.theme-4 .sticky-canvas-card {
+  border-color: rgba(129, 140, 248, 0.3);
+  box-shadow: 0 20px 50px rgba(129, 140, 248, 0.15);
+}
+
+/* Spectroscopy Laboratory Section */
+.spectroscopy-lab-section {
+  background-color: var(--space-surface-card);
+  border: 1px solid var(--space-border-color);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.lab-section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.spectroscopy-workbench {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2rem;
+}
+
+.lab-controls-panel {
+  background-color: rgba(7, 9, 19, 0.4);
+  border: 1px solid var(--space-border-color);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.lab-controls-panel h3 {
+  font-size: 1.1rem;
+  border-bottom: 1px solid var(--space-border-color);
+  padding-bottom: 0.75rem;
+}
+
+.toggle-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.toggle-switch-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-color-primary);
+}
+
+.toggle-switch-label input {
+  display: none;
+}
+
+.toggle-custom-slider {
+  width: 44px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--space-border-color);
+  border-radius: 50px;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.toggle-custom-slider::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background-color: var(--text-color-secondary);
+  border-radius: 50%;
+  transition: var(--transition-smooth);
+}
+
+.toggle-switch-label input:checked + .toggle-custom-slider {
+  background-color: rgba(56, 189, 248, 0.3);
+  border-color: var(--text-color-accent);
+}
+
+.toggle-switch-label input:checked + .toggle-custom-slider::after {
+  left: 22px;
+  background-color: var(--text-color-accent);
+  box-shadow: 0 0 8px var(--text-color-accent);
+}
+
+.gas-effect-tag {
+  font-size: 0.75rem;
+  color: var(--text-color-secondary);
+  margin-left: 2.75rem;
+}
+
+.lab-output-panel {
+  background-color: rgba(7, 9, 19, 0.6);
+  border: 1px solid var(--space-border-color);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.spectrum-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Replace or update this block in assets/css/guide.css */
+.spectrum-canvas-wrapper {
+  background-color: var(--space-background-primary);
+  border-radius: 10px;
+  border: 1px solid var(--space-border-color);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.spectrum-canvas-wrapper canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+
+.spectrum-analysis-desc {
+  font-size: 0.9rem;
+  color: var(--text-color-secondary);
+  line-height: 1.5;
+  background-color: rgba(15, 22, 41, 0.5);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--text-color-accent);
+}
+
+@media (max-width: 900px) {
+  .scrolly-container {
+    grid-template-columns: 1fr;
+  }
+  .scrolly-sticky-viewport {
+    position: relative;
+    top: 0;
+    height: auto;
+  }
+  .spectroscopy-workbench {
+    grid-template-columns: 1fr;
+  }
+}

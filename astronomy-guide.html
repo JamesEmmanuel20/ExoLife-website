@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExoLife: Beyond Our Sun | Astrobiology & Astronomy Guide</title>
+  
+  <!-- Global & Page-Specific Stylesheets -->
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/astronomy-guide.css">
+</head>
+<body>
+
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="site-nav-container">
+      <a href="index.html" class="site-logo">
+        Exo<span>Life</span>
+      </a>
+      
+      <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="hamburger-icon" aria-hidden="true"></span>
+      </button>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links-list">
+          <li><a href="index.html" class="nav-link-item">Home</a></li>
+          <li><a href="calculator.html" class="nav-link-item">Planet Builder</a></li>
+          <li><a href="worlds.html" class="nav-link-item">Worlds Beyond</a></li>
+          <li><a href="astronomy-guide.html" class="nav-link-item" aria-current="page">Astrobiology Guide</a></li>
+          <li><a href="methods.html" class="nav-link-item">Detection Methods</a></li>
+          <li><a href="lab.html" class="nav-link-item">My Lab</a></li>
+          <li><a href="about.html" class="nav-link-item">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Guide Container -->
+  <main class="guide-main-container">
+    
+    <!-- Hero Section -->
+    <section class="guide-hero-section">
+      <h1>The Astronomy & Astrobiology Masterclass</h1>
+      <p>Step inside the universe. Discover how scientists search for alien worlds, decode starlight, and look for signs of life billions of miles away.</p>
+    </section>
+
+    <!-- Scrollytelling Section -->
+    <div class="scrolly-container">
+      
+      <!-- Scrolling Narrative Chapters Column -->
+      <div class="scrolly-text-column">
+        
+        <section id="chapter-1" class="scrolly-chapter-card" data-chapter="1">
+          <span class="chapter-number">01</span>
+          <h2>The "Just Right" Goldilocks Zone</h2>
+          <p>Imagine walking outside on a sunny day. Stand too close to a blazing bonfire, and you'll scorch. Stand a mile away, and you'll freeze. The same rule applies to planets and stars.</p>
+          <p>Astronomers look for the <strong>Habitable Zone</strong>—the sweet spot where a planet is neither too hot nor too cold, allowing liquid water to pool stably on its surface.</p>
+          <ul class="chapter-bullet-list">
+            <li><strong>Too close:</strong> Oceans boil away into a runaway greenhouse effect (like Venus).</li>
+            <li><strong>In the sweet spot:</strong> Stable temperatures capable of supporting rivers and oceans (like Earth).</li>
+            <li><strong>Too far:</strong> Water freezes solid into permanent ice sheets (like Mars or Pluto).</li>
+          </ul>
+        </section>
+
+        <section id="chapter-2" class="scrolly-chapter-card" data-chapter="2">
+          <span class="chapter-number">02</span>
+          <h2>Choosing the Right Sun</h2>
+          <p>Not all stars make good parents for living worlds. A star's personality dictates whether life can peacefully take root or get blasted away by stellar tantrums.</p>
+          <ul class="chapter-bullet-list">
+            <li><strong>Red Dwarfs (M-Dwarfs):</strong> Small, dim, and make up 75% of our galaxy. They live for trillions of years, but they love throwing violent solar flares that can strip a planet's air away.</li>
+            <li><strong>Yellow Suns (G-Type):</strong> Warm, stable, and steady. They give planets a calm, reliable climate for billions of years (just like our Sun!).</li>
+            <li><strong>Giant Blue Stars:</strong> Bright and majestic, but they burn through their nuclear fuel so fast they explode before life even has a chance to begin.</li>
+          </ul>
+        </section>
+
+        <section id="chapter-3" class="scrolly-chapter-card" data-chapter="3">
+          <span class="chapter-number">03</span>
+          <h2>Reading Starlight Like a Barcode</h2>
+          <p>How do we know what an alien atmosphere is made of when the planet is hundreds of light-years away? We use starlight as a cosmic fingerprint scanner.</p>
+          <p>As a planet crosses in front of its star, starlight filters through the planet's thin atmospheric ring. Different gases—like water vapor or oxygen—act like colored filters, swallowing specific colors of light and leaving unique dip lines in the spectrum.</p>
+          <ul class="chapter-bullet-list">
+            <li>Starlight passes through the planet's sky during a transit.</li>
+            <li>Molecules absorb specific wavelengths, leaving shadow fingerprints.</li>
+            <li>Astronomers read these dips to find water, carbon dioxide, and methane.</li>
+          </ul>
+        </section>
+
+        <section id="chapter-4" class="scrolly-chapter-card" data-chapter="4">
+          <span class="chapter-number">04</span>
+          <h2>Holding Onto Air: Gravity Matters</h2>
+          <p>Finding a rocky world in the right zone is only half the battle. The planet also has to keep its blanket of air!</p>
+          <p>If a planet is too small, its weak gravity acts like a leaky sieve, letting precious gases drift off into space. But if it's massive enough, its strong gravitational grip holds onto a thick, protective atmosphere.</p>
+          <ul class="chapter-bullet-list">
+            <li><strong>Light gravity:</strong> Gases easily escape into the vacuum of space.</li>
+            <li><strong>Strong gravity:</strong> Retains deep, insulating blankets of air and water.</li>
+            <li><strong>Magnetic shields:</strong> Invisible magnetic fields protect the atmosphere from being blown away by stellar winds.</li>
+          </ul>
+        </section>
+
+      </div>
+
+      <!-- Sticky Visualizer Viewport Column -->
+      <div class="scrolly-sticky-viewport">
+        <div class="sticky-canvas-card">
+          <div class="viewport-header">
+            <span id="viewport-title" class="badge-accent">Chapter 1: The Habitable Zone</span>
+            <span class="live-indicator">● LIVE VISUALIZER</span>
+          </div>
+          <div class="canvas-display-wrapper">
+            <canvas id="scrolly-visualizer-canvas" width="450" height="350" aria-label="Interactive educational canvas animation illustrating astronomical concepts"></canvas>
+          </div>
+          <p id="viewport-caption" class="viewport-caption-text">Watch how distance from the sun determines whether a world is frozen, warm, or scorching.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Interactive Spectroscopy Laboratory Widget Section -->
+    <section class="spectroscopy-lab-section">
+      <div class="lab-section-header">
+        <h2>Interactive Starlight Laboratory</h2>
+        <p>Turn atmospheric gases on and off below to see how astronomers detect invisible alien molecules hiding inside starlight!</p>
+      </div>
+
+      <div class="spectroscopy-workbench">
+        <!-- Controls Panel -->
+        <div class="lab-controls-panel">
+          <h3>Atmospheric Ingredients</h3>
+          
+          <div class="toggle-control-group">
+            <label class="toggle-switch-label">
+              <input type="checkbox" id="toggle-h2o" data-gas="h2o" checked>
+              <span class="toggle-custom-slider"></span>
+              <span>Water Vapor (H₂O)</span>
+            </label>
+            <span class="gas-effect-tag">Creates deep dips at 1.4µm & 1.9µm</span>
+          </div>
+
+          <div class="toggle-control-group">
+            <label class="toggle-switch-label">
+              <input type="checkbox" id="toggle-co2" data-gas="co2">
+              <span class="toggle-custom-slider"></span>
+              <span>Carbon Dioxide (CO₂)</span>
+            </label>
+            <span class="gas-effect-tag">Creates strong bands at 2.7µm & 4.3µm</span>
+          </div>
+
+          <div class="toggle-control-group">
+            <label class="toggle-switch-label">
+              <input type="checkbox" id="toggle-ch4" data-gas="ch4">
+              <span class="toggle-custom-slider"></span>
+              <span>Methane (CH₄)</span>
+            </label>
+            <span class="gas-effect-tag">Key organic sign at 1.66µm & 2.3µm</span>
+          </div>
+
+          <div class="toggle-control-group">
+            <label class="toggle-switch-label">
+              <input type="checkbox" id="toggle-o3" data-gas="o3">
+              <span class="toggle-custom-slider"></span>
+              <span>Ozone (O₃)</span>
+            </label>
+            <span class="gas-effect-tag">Ultraviolet shield signature at 0.6µm</span>
+          </div>
+        </div>
+
+        <!-- Spectrum Graph Output Panel -->
+        <div class="lab-output-panel">
+          <div class="spectrum-header">
+            <h3>Starlight Absorption Barcode</h3>
+            <span id="biosphere-status-badge" class="badge-neutral">Atmosphere Status: Basic</span>
+          </div>
+          
+          <div class="spectrum-canvas-wrapper">
+            <canvas id="spectroscopy-graph-canvas" width="600" height="250" aria-label="Interactive spectroscopy graph showing starlight absorption curves"></canvas>
+          </div>
+          
+          <p id="spectrum-analysis-text" class="spectrum-analysis-desc">
+            Toggle gases on the left to see how their unique absorption fingerprints change the starlight graph.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="footer-content-wrapper">
+      <p>&copy; 2026 ExoLife: Beyond Our Sun. Made accessible for cosmic explorers everywhere.</p>
+      <p>Empowering public understanding of astrobiology through open web standards.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/guide-scrolly.js"></script>
+</body>
+</html>
