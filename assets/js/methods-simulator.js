@@ -1,155 +1,187 @@
 /* ===================================================================== */
-/* EXOLIFE: BEYOND OUR SUN - DETECTION METHODS INTERACTIVE SIMULATOR      */
+/* EXOLIFE: BEYOND OUR SUN - TRANSIT SIMULATOR & CONTINUOUS WAVE ENGINE  */
 /* ===================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const tabButtons = document.querySelectorAll('.method-tab-btn');
-  const sizeSlider = document.getElementById('sim-planet-size');
-  const distSlider = document.getElementById('sim-orbital-dist');
-  const valSize = document.getElementById('val-planet-size');
-  const valDist = document.getElementById('val-orbital-dist');
-  const detectorExplanation = document.getElementById('detector-explanation');
-  const signalTitle = document.getElementById('signal-title');
-  const signalCanvas = document.getElementById('detector-signal-canvas');
+  const transitCanvas = document.getElementById('transit-animation-canvas');
+  const lightCurveCanvas = document.getElementById('light-curve-canvas');
+  
+  const planetSizeSlider = document.getElementById('planet-size-slider');
+  const planetSizeVal = document.getElementById('planet-size-val');
+  const orbitSpeedSlider = document.getElementById('orbit-speed-slider');
+  const orbitSpeedVal = document.getElementById('orbit-speed-val');
+  
+  const statDepth = document.getElementById('stat-depth');
+  const statFrequency = document.getElementById('stat-frequency');
 
-  if (!signalCanvas) return;
+  if (!transitCanvas || !lightCurveCanvas) return;
 
-  let currentMethod = 'transit'; // 'transit' or 'radial'
+  const transitCtx = transitCanvas.getContext('2d');
+  const lightCtx = lightCurveCanvas.getContext('2d');
 
-  // Tab Switcher
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      tabButtons.forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      currentMethod = e.target.getAttribute('data-method');
+  let animationTime = 0;
 
-      if (currentMethod === 'transit') {
-        signalTitle.textContent = 'Transit Light Curve Signal';
-        detectorExplanation.textContent = 'Notice how a larger planet radius creates a deeper light dip during a stellar transit event!';
-      } else {
-        signalTitle.textContent = 'Radial Velocity Doppler Wobble Curve';
-        detectorExplanation.textContent = 'Notice how closer orbital distance and larger mass increase the velocity amplitude of the star wobble!';
-      }
-      renderSignalSimulation();
-    });
+  // Parameters
+  let planetRadius = parseFloat(planetSizeSlider.value); // 0.6 to 3.0
+  let orbitSpeed = parseFloat(orbitSpeedSlider.value);     // 0.4 to 2.5
+
+  // Slider event listeners
+  planetSizeSlider.addEventListener('input', (e) => {
+    planetRadius = parseFloat(e.target.value);
+    planetSizeVal.textContent = `${planetRadius.toFixed(1)} R⊕`;
+    updateTelemetry();
   });
 
-  // Slider Listeners
-  if (sizeSlider) {
-    sizeSlider.addEventListener('input', () => {
-      valSize.textContent = `${parseFloat(sizeSlider.value).toFixed(1)} R⊕`;
-      renderSignalSimulation();
-    });
+  orbitSpeedSlider.addEventListener('input', (e) => {
+    orbitSpeed = parseFloat(e.target.value);
+    orbitSpeedVal.textContent = `${orbitSpeed.toFixed(1)}x`;
+    statFrequency.textContent = orbitSpeed > 1.5 ? 'Rapid' : orbitSpeed < 0.8 ? 'Slow' : 'Standard';
+  });
+
+  function updateTelemetry() {
+    // Transit depth proportional to (Rp / Rstar)^2
+    let relativeRadius = planetRadius / 3.0; // scaled
+    let depthPercent = (Math.pow(relativeRadius, 2) * 2.5).toFixed(2);
+    statDepth.textContent = `${depthPercent}%`;
   }
 
-  if (distSlider) {
-    distSlider.addEventListener('input', () => {
-      valDist.textContent = `${parseFloat(distSlider.value).toFixed(2)} AU`;
-      renderSignalSimulation();
-    });
-  }
+  updateTelemetry();
 
-  // Render Signal Curve on Canvas
-  function renderSignalSimulation() {
-    const ctx = signalCanvas.getContext('2d');
-    const width = signalCanvas.width;
-    const height = signalCanvas.height;
+  // ===================================================================== */
+  // SIMULATION ANIMATION LOOP                                           */
+  // ===================================================================== */
+  function runSimulation() {
+    const tWidth = transitCanvas.width;
+    const tHeight = transitCanvas.height;
+    const lWidth = lightCurveCanvas.width;
+    const lHeight = lightCurveCanvas.height;
 
-    ctx.clearRect(0, 0, width, height);
+    // --- 1. RENDER STAR & TRANSITING PLANET (Canvas 1) ---
+    transitCtx.clearRect(0, 0, tWidth, tHeight);
+
+    const starCx = tWidth / 2;
+    const starCy = tHeight / 2;
+    const starRadius = 50;
+
+    // Draw Star with radiant glow
+    const starGrad = transitCtx.createRadialGradient(starCx, starCy, 10, starCx, starCy, starRadius);
+    starGrad.addColorStop(0, '#fef08a');
+    starGrad.addColorStop(0.7, '#f59e0b');
+    starGrad.addColorStop(1, 'rgba(245, 158, 11, 0.2)');
+    transitCtx.fillStyle = starGrad;
+    transitCtx.beginPath();
+    transitCtx.arc(starCx, starCy, starRadius, 0, Math.PI * 2);
+    transitCtx.fill();
+
+    // Calculate Planet Orbital Position across star disk
+    // Orbit period scaled by orbitSpeed
+    let cycle = (animationTime * orbitSpeed * 0.015) % (Math.PI * 2);
+    // Map cycle to horizontal x position across star (-90 to +90 pixels)
+    let planetOffsetX = Math.sin(cycle) * 90; 
+    let planetPx = starCx + planetOffsetX;
+    let planetPy = starCy + 5; // slight tilt
+
+    // Actual drawn radius scaled from R_earth
+    let drawnPlanetRadius = planetRadius * 4.5;
+
+    // Check if planet is transiting across the star disk (for dimming calculation)
+    let isTransiting = Math.abs(planetOffsetX) < (starRadius + drawnPlanetRadius * 0.5);
+
+    // Draw Planet
+    transitCtx.fillStyle = '#0f172a';
+    transitCtx.beginPath();
+    transitCtx.arc(planetPx, planetPy, drawnPlanetRadius, 0, Math.PI * 2);
+    transitCtx.fill();
+
+    // Planet atmospheric rim highlight
+    transitCtx.strokeStyle = 'rgba(56, 189, 248, 0.7)';
+    transitCtx.lineWidth = 1.5;
+    transitCtx.beginPath();
+    transitCtx.arc(planetPx, planetPy, drawnPlanetRadius, 0, Math.PI * 2);
+    transitCtx.stroke();
+
+
+    // --- 2. RENDER CONTINUOUS LIGHT CURVE WAVEFORM (Canvas 2) ---
+    lightCtx.clearRect(0, 0, lWidth, lHeight);
 
     // Draw background grid
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
-    ctx.lineWidth = 1;
-    for (let x = 0; x < width; x += 50) {
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, height);
-      ctx.stroke();
+    lightCtx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+    lightCtx.lineWidth = 1;
+    for (let x = 0; x < lWidth; x += 40) {
+      lightCtx.beginPath();
+      lightCtx.moveTo(x, 0);
+      lightCtx.lineTo(x, lHeight);
+      lightCtx.stroke();
     }
-    for (let y = 0; y < height; y += 50) {
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(width, y);
-      ctx.stroke();
+    for (let y = 0; y < lHeight; y += 40) {
+      lightCtx.beginPath();
+      lightCtx.moveTo(0, y);
+      lightCtx.lineTo(lWidth, y);
+      lightCtx.stroke();
     }
 
-    const planetSize = parseFloat(sizeSlider.value);
-    const orbitalDist = parseFloat(distSlider.value);
+    // Baseline 100% brightness line
+    let baselineY = 40;
+    lightCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    lightCtx.setLineDash([4, 4]);
+    lightCtx.beginPath();
+    lightCtx.moveTo(0, baselineY);
+    lightCtx.lineTo(lWidth, baselineY);
+    lightCtx.stroke();
+    lightCtx.setLineDash([]);
 
-    const points = [];
-    const steps = width;
+    // Plot continuous light curve waveform across time
+    lightCtx.strokeStyle = '#38bdf8';
+    lightCtx.lineWidth = 2.5;
+    lightCtx.beginPath();
 
-    if (currentMethod === 'transit') {
-      // Transit Light Curve: Baseline 100% with a U-shaped dip in the center
-      const dipDepth = Math.pow(planetSize, 2) * 0.035; // Deeper dip for larger radius
-
-      for (let x = 0; x <= steps; x++) {
-        let phase = (x / width) * Math.PI * 4 - Math.PI * 2; // -2pi to 2pi
-        let flux = 1.0;
-
-        // U-shaped transit dip around center phase
-        if (Math.abs(phase) < 0.6) {
-          flux -= dipDepth * Math.cos((phase / 0.6) * (Math.PI / 2));
-        }
-
-        let y = height - (flux * (height - 60) + 30);
-        points.push({ x, y });
+    const wavePoints = [];
+    for (let x = 0; x <= lWidth; x += 2) {
+      // Time coordinate shifting with animationTime
+      let timeCoord = (x + animationTime * orbitSpeed * 1.5) * 0.03;
+      
+      // Periodic transit dip function using cosine wave power
+      let relativeRadius = planetRadius / 3.0;
+      let dipDepth = Math.pow(relativeRadius, 2) * 35; // Amplitude of dip
+      
+      // Shape the dip into a flat-bottomed U-shape transit curve
+      let waveVal = Math.cos(timeCoord);
+      let dip = 0;
+      if (waveVal > 0.85) {
+        let normalized = (waveVal - 0.85) / 0.15;
+        dip = dipDepth * normalized;
       }
 
-      // Draw Transit Curve Line
-      ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 2.5;
-      ctx.beginPath();
-      points.forEach((pt, idx) => {
-        if (idx === 0) ctx.moveTo(pt.x, pt.y);
-        else ctx.lineTo(pt.x, pt.y);
-      });
-      ctx.stroke();
-
-      // Fill underneath curve dip
-      ctx.lineTo(width, height);
-      ctx.lineTo(0, height);
-      ctx.closePath();
-      const grad = ctx.createLinearGradient(0, 0, 0, height);
-      grad.addColorStop(0, 'rgba(56, 189, 248, 0.2)');
-      grad.addColorStop(1, 'rgba(56, 189, 248, 0.0)');
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-    } else {
-      // Radial Velocity Doppler Sine Wave
-      // Amplitude increases with mass/size and closer distance
-      const amplitude = (planetSize * 15) / Math.sqrt(orbitalDist);
-
-      for (let x = 0; x <= steps; x++) {
-        let t = (x / width) * Math.PI * 4;
-        let velocity = amplitude * Math.sin(t);
-
-        let y = (height / 2) - velocity;
-        points.push({ x, y });
-      }
-
-      // Draw Velocity Sine Wave
-      ctx.strokeStyle = '#f59e0b';
-      ctx.lineWidth = 2.5;
-      ctx.beginPath();
-      points.forEach((pt, idx) => {
-        if (idx === 0) ctx.moveTo(pt.x, pt.y);
-        else ctx.lineTo(pt.x, pt.y);
-      });
-      ctx.stroke();
-
-      // Center axis line
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-      ctx.setLineDash([4, 4]);
-      ctx.beginPath();
-      ctx.moveTo(0, height / 2);
-      ctx.lineTo(width, height / 2);
-      ctx.stroke();
-      ctx.setLineDash([]);
+      let y = baselineY + dip;
+      wavePoints.push({ x, y });
     }
+
+    wavePoints.forEach((pt, index) => {
+      if (index === 0) lightCtx.moveTo(pt.x, pt.y);
+      else lightCtx.lineTo(pt.x, pt.y);
+    });
+    lightCtx.stroke();
+
+    // Fill gradient under waveform
+    lightCtx.lineTo(lWidth, lHeight);
+    lightCtx.lineTo(0, lHeight);
+    lightCtx.closePath();
+    const waveGrad = lightCtx.createLinearGradient(0, 0, 0, lHeight);
+    waveGrad.addColorStop(0, 'rgba(56, 189, 248, 0.2)');
+    waveGrad.addColorStop(1, 'rgba(56, 189, 248, 0.0)');
+    lightCtx.fillStyle = waveGrad;
+    lightCtx.fill();
+
+    // Draw live scanning head indicator on light curve matching current animation time
+    let scanX = (animationTime * orbitSpeed * 1.5) % lWidth;
+    lightCtx.fillStyle = '#10b981';
+    lightCtx.beginPath();
+    lightCtx.arc(scanX, baselineY + (isTransiting ? Math.pow(planetRadius/3.0, 2)*35 : 0), 4, 0, Math.PI * 2);
+    lightCtx.fill();
+
+    animationTime++;
+    requestAnimationFrame(runSimulation);
   }
 
-  // Initial render
-  renderSignalSimulation();
+  runSimulation();
 });

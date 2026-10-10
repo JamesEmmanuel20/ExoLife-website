@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ExoLife: Beyond Our Sun | Exoplanet Detection Methods</title>
+  <title>ExoLife: Beyond Our Sun | Detection Methods & Transit Lab</title>
   
   <!-- Global & Page-Specific Stylesheets -->
   <link rel="stylesheet" href="assets/css/global.css">
@@ -36,117 +36,106 @@
     </div>
   </header>
 
-  <!-- Main Container -->
+  <!-- Main Methods Container -->
   <main class="methods-main-container">
     
     <!-- Hero Section -->
     <section class="methods-hero-section">
-      <h1>Cosmic Detective Work: Finding Invisible Worlds</h1>
-      <p>Exoplanets don't emit their own visible light—they are blindingly outshone by their host stars. Discover the ingenious physics techniques astronomers use to find them across trillions of miles.</p>
+      <h1>Cosmic Detective Work: Finding Exoplanets</h1>
+      <p>Because planets are millions of times fainter than their host stars, astronomers use ingenious physics and high-precision optics to detect them across light-years.</p>
     </section>
 
-    <!-- Methods Explainer Grid -->
-    <section class="methods-explainer-grid" aria-label="Detection Techniques Overview">
+    <!-- Core Detection Methods Breakdown Grid -->
+    <section class="methods-grid-section" aria-label="Exoplanet Detection Techniques">
       
-      <!-- Card 1: Transit Method -->
-      <article class="method-card">
-        <div class="method-card-header">
-          <span class="method-badge">Most Productive</span>
-          <h2>1. Transit Photometry</h2>
-        </div>
-        <p>When a planet crosses directly between its star and our telescope, it blocks a tiny fraction of starlight. By measuring this repeating dimming dip over time, astronomers calculate the planet's size and orbital period.</p>
-        <ul class="method-specs-list">
-          <li><span>Best for:</span> Close-in planets & space telescopes (Kepler, TESS)</li>
-          <li><span>Reveals:</span> Planet radius & orbital year</li>
-        </ul>
+      <article class="method-info-card">
+        <div class="method-icon" aria-hidden="true">🌑</div>
+        <h2>1. Transit Photometry</h2>
+        <p>When a planet crosses (transits) directly in front of its star from our viewpoint, it blocks a tiny fraction of starlight. Telescopes measure this periodic dimming.</p>
+        <span class="badge-accent">Used by Kepler, TESS & JWST</span>
       </article>
 
-      <!-- Card 2: Radial Velocity -->
-      <article class="method-card">
-        <div class="method-card-header">
-          <span class="method-badge">Mass & Weight</span>
-          <h2>2. Radial Velocity (Wobble)</h2>
-        </div>
-        <p>A planet's gravity isn't just pulled by the star—the planet also pulls back! As an exoplanet orbits, it causes its host star to wobble slightly back and forth. We detect this using the Doppler shift of starlight.</p>
-        <ul class="method-specs-list">
-          <li><span>Best for:</span> Massive worlds & ground observatories</li>
-          <li><span>Reveals:</span> Planetary mass & gravitational pull</li>
-        </ul>
+      <article class="method-info-card">
+        <div class="method-icon" aria-hidden="true">〰️</div>
+        <h2>2. Radial Velocity</h2>
+        <p>A planet's gravity causes its host star to wobble slightly back and forth. This stellar wobble shifts the color of the star's light via the Doppler effect.</p>
+        <span class="badge-neutral">Measures Planetary Mass</span>
       </article>
 
-      <!-- Card 3: Direct Imaging -->
-      <article class="method-card">
-        <div class="method-card-header">
-          <span class="method-badge">Visual Snapshots</span>
-          <h2>3. Direct Imaging</h2>
-        </div>
-        <p>Using specialized optics called coronagraphs and starshades, telescopes block out the blinding glare of the host star so we can capture actual direct photographs of giant outer planets.</p>
-        <ul class="method-specs-list">
-          <li><span>Best for:</span> Young, massive planets far from their stars</li>
-          <li><span>Reveals:</span> Direct thermal glow & atmospheric colors</li>
-        </ul>
+      <article class="method-info-card">
+        <div class="method-icon" aria-hidden="true">📸</div>
+        <h2>3. Direct Imaging</h2>
+        <p>Using specialized starlight blockers called coronagraphs, telescopes blot out the blinding glare of a star to snap direct photographs of giant outer worlds.</p>
+        <span class="badge-neutral">Best for Young Gas Giants</span>
       </article>
 
-      <!-- Card 4: Microlensing -->
-      <article class="method-card">
-        <div class="method-card-header">
-          <span class="method-badge">Einstein's Relativity</span>
-          <h2>4. Gravitational Microlensing</h2>
-        </div>
-        <p>When a foreground star and its exoplanet pass in front of a distant background star, their gravity acts like a cosmic magnifying glass, bending and temporarily brightening the starlight.</p>
-        <ul class="method-specs-list">
-          <li><span>Best for:</span> Rogue planets & distant galactic worlds</li>
-          <li><span>Reveals:</span> Worlds light-years away in deep space</li>
-        </ul>
+      <article class="method-info-card">
+        <div class="method-icon" aria-hidden="true">🔍</div>
+        <h2>4. Gravitational Microlensing</h2>
+        <p>Einstein’s theory of relativity shows that massive objects bend starlight. When a foreground star and planet pass in front of a distant background star, they act like a cosmic magnifying glass.</p>
+        <span class="badge-neutral">Finds Distant Rogue Worlds</span>
       </article>
 
     </section>
 
-    <!-- Interactive Detection Simulator Laboratory -->
-    <section class="simulator-lab-section">
+    <!-- Interactive Transit Simulator Lab Section -->
+    <section class="transit-lab-section">
       <div class="lab-section-header">
-        <h2>Interactive Detection Laboratory</h2>
-        <p>Adjust planet size and distance below to see how telescopes capture transit light dips and radial velocity wobble curves in real time!</p>
+        <h2>Interactive Transit Laboratory</h2>
+        <p>Experiment with planet size and orbital speed below. Watch how the transit animation coordinates in real-time with the continuous light-curve waveform!</p>
       </div>
 
-      <div class="detector-workbench">
-        <!-- Control Panel -->
-        <div class="detector-controls-panel">
+      <div class="transit-workbench">
+        <!-- Controls Panel -->
+        <div class="transit-controls-panel">
+          <h3>Simulation Parameters</h3>
           
-          <div class="method-selector-tabs">
-            <button class="method-tab-btn active" data-method="transit">Transit Method</button>
-            <button class="method-tab-btn" data-method="radial">Radial Velocity</button>
+          <div class="control-slider-group">
+            <div class="slider-label-row">
+              <label for="planet-size-slider">Planet Radius ($R_p$):</label>
+              <span id="planet-size-val">1.2 $R_\oplus$</span>
+            </div>
+            <input type="range" id="planet-size-slider" min="0.6" max="3.0" step="0.1" value="1.2" class="form-range-input">
+            <span class="slider-hint">Larger planets block more starlight, creating deeper dips.</span>
           </div>
 
-          <div class="slider-control-group">
-            <label for="sim-planet-size">Planet Size / Radius: <strong id="val-planet-size">1.2 R⊕</strong></label>
-            <input type="range" id="sim-planet-size" min="0.5" max="3.5" step="0.1" value="1.2" class="form-range-input">
+          <div class="control-slider-group">
+            <div class="slider-label-row">
+              <label for="orbit-speed-slider">Orbital Velocity / Frequency:</label>
+              <span id="orbit-speed-val">1.0x</span>
+            </div>
+            <input type="range" id="orbit-speed-slider" min="0.4" max="2.5" step="0.1" value="1.0" class="form-range-input">
+            <span class="slider-hint">Controls how fast the planet orbits and how frequently dips occur.</span>
           </div>
 
-          <div class="slider-control-group">
-            <label for="sim-orbital-dist">Orbital Distance: <strong id="val-orbital-dist">0.05 AU</strong></label>
-            <input type="range" id="sim-orbital-dist" min="0.02" max="0.30" step="0.01" value="0.05" class="form-range-input">
+          <div class="simulation-stats-box">
+            <h4>Live Telemetry</h4>
+            <ul>
+              <li><span>Flux Dimming Depth:</span> <strong id="stat-depth">1.44%</strong></li>
+              <li><span>Transit Frequency:</span> <strong id="stat-frequency">Standard</strong></li>
+            </ul>
           </div>
-
-          <p id="detector-explanation" class="detector-help-text">
-            Notice how a larger planet radius creates a deeper light dip during a stellar transit event!
-          </p>
         </div>
 
-        <!-- Signal Output Graph Panel -->
-        <div class="detector-output-panel">
-          <div class="output-header">
-            <h3 id="signal-title">Transit Light Curve Signal</h3>
-            <span id="signal-status-badge" class="badge-success">Signal Detected</span>
+        <!-- Visualizers Output Panel -->
+        <div class="transit-visualizer-panel">
+          
+          <!-- Canvas 1: Star & Crossing Planet Animation -->
+          <div class="canvas-sub-box">
+            <h4>Stellar Transit View</h4>
+            <div class="canvas-container">
+              <canvas id="transit-animation-canvas" width="480" height="180" aria-label="Animation of exoplanet crossing star disk"></canvas>
+            </div>
           </div>
 
-          <div class="signal-canvas-wrapper">
-            <canvas id="detector-signal-canvas" width="600" height="260" aria-label="Interactive exoplanet detection signal graph"></canvas>
+          <!-- Canvas 2: Continuous Light Curve Wave -->
+          <div class="canvas-sub-box">
+            <h4>Continuous Light Curve (Brightness vs. Time)</h4>
+            <div class="canvas-container">
+              <canvas id="light-curve-canvas" width="480" height="180" aria-label="Continuous waveform graph showing periodic transit brightness dips"></canvas>
+            </div>
           </div>
 
-          <p id="signal-reading-caption" class="signal-caption-text">
-            Y-axis: Relative Starlight Brightness (%) | X-axis: Time / Orbital Phase
-          </p>
         </div>
       </div>
     </section>
