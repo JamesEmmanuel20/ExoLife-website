@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="James Emmanuel Yeboah-Asiamah">
+  <meta name="description" content="ExoLife Planet Builder page – Design custom exoplanets, tweak stellar distance and atmospheric pressure, and calculate surface habitability in real time.">
+  <title>ExoLife: Beyond Our Sun | Planet Builder & Simulator</title>
+  
+  <!-- Global & Page-Specific Stylesheets -->
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/calculator.css">
+</head>
+<body>
+
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="site-nav-container">
+      <a href="index.html" class="site-logo">
+        Exo<span>Life</span>
+      </a>
+      
+      <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="hamburger-icon" aria-hidden="true"></span>
+      </button>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links-list">
+          <li><a href="index.html" class="nav-link-item">Home</a></li>
+          <li><a href="calculator.html" class="nav-link-item" aria-current="page">Planet Builder</a></li>
+          <li><a href="worlds.html" class="nav-link-item">Worlds Beyond</a></li>
+          <li><a href="astronomy-guide.html" class="nav-link-item">Astrobiology Guide</a></li>
+          <li><a href="methods.html" class="nav-link-item">Detection Methods</a></li>
+          <li><a href="lab.html" class="nav-link-item">My Lab</a></li>
+          <li><a href="about.html" class="nav-link-item">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Calculator & Simulation Container -->
+  <main class="calculator-layout-container">
+    
+    <!-- LEFT SIDEBAR: Stellar & Planetary Physical Controls -->
+    <aside class="control-panel left-panel" aria-label="Physical Configuration Controls">
+      <div class="panel-header">
+        <h2>Physical Parameters</h2>
+        <p>Configure your star and planet composition.</p>
+      </div>
+
+      <form id="planet-builder-form">
+        <!-- Star Type Selector -->
+        <div class="form-control-group">
+          <label for="star-type-select">Host Star Type</label>
+          <select id="star-type-select" name="starType" class="form-select-input">
+            <option value="m-dwarf">M-Dwarf (Red & Cool)</option>
+            <option value="k-type" selected>K-Type (Orange Star)</option>
+            <option value="g-type">G-Type (Sun-like Yellow)</option>
+            <option value="f-type">F-Type (Hot White-Yellow)</option>
+          </select>
+          <small class="form-hint" id="star-description">Stable orange star with a balanced habitable zone.</small>
+        </div>
+
+        <!-- Planet Radius Slider -->
+        <div class="form-control-group">
+          <div class="label-with-output">
+            <label for="planet-radius-slider">Planet Radius</label>
+            <output id="planet-radius-output" for="planet-radius-slider">1.0 $R_{\oplus}$</output>
+          </div>
+          <input type="range" id="planet-radius-slider" name="planetRadius" min="0.5" max="3.0" step="0.1" value="1.0" class="form-range-input">
+          <small class="form-hint">Relative to Earth radius ($1.0 =$ Earth size).</small>
+        </div>
+
+        <!-- Atmospheric Thickness Slider -->
+        <div class="form-control-group">
+          <div class="label-with-output">
+            <label for="atmosphere-thickness-slider">Atmosphere Thickness</label>
+            <output id="atmosphere-thickness-output" for="atmosphere-thickness-slider">1.0 atm</output>
+          </div>
+          <input type="range" id="atmosphere-thickness-slider" name="atmosphereThickness" min="0.0" max="5.0" step="0.1" value="1.0" class="form-range-input">
+          <small class="form-hint">Greenhouse gas pressure factor.</small>
+        </div>
+      </form>
+    </aside>
+
+    <!-- CENTER STAGE: Interactive Simulation Viewport -->
+    <section class="simulation-viewport-section" aria-label="Solar System Simulation Viewport">
+      <div class="viewport-header">
+        <h1>Cosmic Orbit Simulator</h1>
+        <div id="habitability-verdict-badge" class="verdict-badge badge-neutral" role="status">Initializing Simulation...</div>
+      </div>
+
+      <div class="canvas-wrapper">
+        <canvas id="solar-system-canvas" aria-label="Live animation of star and orbiting planet with Goldilocks zone" role="img">
+          Your browser does not support HTML5 Canvas. Please update your browser to experience the simulation.
+        </canvas>
+        <div class="canvas-legend">
+          <span class="legend-item"><span class="legend-dot red-dot"></span> Too Hot (Scorched)</span>
+          <span class="legend-item"><span class="legend-dot green-dot"></span> Goldilocks Zone (Habitable)</span>
+          <span class="legend-item"><span class="legend-dot blue-dot"></span> Too Cold (Frozen)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT SIDEBAR: Orbital Controls & Telemetry Readouts -->
+    <aside class="telemetry-panel right-panel" aria-label="Orbital Controls and Mission Telemetry">
+      <div class="panel-header">
+        <h2>Orbital & Telemetry</h2>
+        <p>Position your world and review live diagnostics.</p>
+      </div>
+
+      <!-- Orbital Distance Control -->
+      <div class="form-control-group">
+        <div class="label-with-output">
+          <label for="orbital-distance-slider">Orbital Distance</label>
+          <output id="orbital-distance-output" for="orbital-distance-slider">1.00 AU</output>
+        </div>
+        <input type="range" id="orbital-distance-slider" name="orbitalDistance" min="0.2" max="4.0" step="0.05" value="1.0" class="form-range-input">
+        <small class="form-hint">Astronomical Units ($1\text{ AU} =$ Earth-Sun distance).</small>
+      </div>
+
+      <!-- Live Telemetry Card -->
+      <div class="telemetry-stats-card">
+        <h3>Live Telematics</h3>
+        <ul class="telemetry-list">
+          <li><span>Surface Temp:</span> <strong id="telemetry-temp">288 K (15°C)</strong></li>
+          <li><span>Stellar Flux:</span> <strong id="telemetry-flux">1.36 kW/m²</strong></li>
+          <li><span>Atmosphere Status:</span> <strong id="telemetry-atmosphere">Balanced</strong></li>
+        </ul>
+      </div>
+
+      <!-- Mission Computer Log -->
+      <div class="mission-log-card">
+        <h3>Mission Computer Log</h3>
+        <div id="mission-log-text" class="log-output-box" aria-live="polite">
+          System online. Adjust stellar parameters and orbital distance to begin scanning for habitability.
+        </div>
+      </div>
+
+      <!-- Inside the Right Sidebar of calculator.html, right above the save button -->
+      <!-- Custom Planet Name Input -->
+      <div class="form-control-group">
+        <label for="planet-name-input">Planet Designation / Name</label>
+        <input type="text" id="planet-name-input" name="planetName" class="form-select-input" value="Kepler-452b Prime" placeholder="e.g., Aurelia, New Terra...">
+        <small class="form-hint">Give your world a unique name for mission logs and lab tracking.</small>
+      </div>
+
+      <!-- Save Button -->
+      <button id="save-planet-btn" class="primary-action-button save-button">Save Planet to Lab</button>
+    </aside>
+
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="footer-content-wrapper">
+      <p>&copy; 2026 ExoLife: Beyond Our Sun. Made accessible for cosmic explorers everywhere.</p>
+      <p>Empowering public understanding of astrobiology through open web standards.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/calculator-sim.js"></script>
+</body>
+</html>

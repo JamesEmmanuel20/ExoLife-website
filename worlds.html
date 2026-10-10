@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="James Emmanuel Yeboah-Asiamah">
+  <meta name="description" content="ExoLife Worlds Beyond – Explore a curated 50-exoplanet catalog with search filters, procedural canvas illustrations, and Earth comparison telemetry.">
+  <title>ExoLife: Beyond Our Sun | Worlds Discovery Gallery</title>
+  
+  <!-- Global & Page-Specific Stylesheets -->
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/worlds.css">
+</head>
+<body>
+
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="site-nav-container">
+      <a href="index.html" class="site-logo">
+        Exo<span>Life</span>
+      </a>
+      
+      <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="hamburger-icon" aria-hidden="true"></span>
+      </button>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links-list">
+          <li><a href="index.html" class="nav-link-item">Home</a></li>
+          <li><a href="calculator.html" class="nav-link-item">Planet Builder</a></li>
+          <li><a href="worlds.html" class="nav-link-item" aria-current="page">Worlds Beyond</a></li>
+          <li><a href="astronomy-guide.html" class="nav-link-item">Astrobiology Guide</a></li>
+          <li><a href="methods.html" class="nav-link-item">Detection Methods</a></li>
+          <li><a href="lab.html" class="nav-link-item">My Lab</a></li>
+          <li><a href="about.html" class="nav-link-item">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Gallery Landmark -->
+  <main class="worlds-main-container">
+    
+    <!-- Gallery Hero Section -->
+    <section class="worlds-hero-section">
+      <div class="worlds-hero-content">
+        <h1>Exoplanet Discovery Gallery</h1>
+        <p>Explore our curated database of confirmed alien worlds. Filter by habitability, search by designation, and inspect procedurally generated telemetry.</p>
+      </div>
+
+      <!-- Search & Filter Bar -->
+      <div class="worlds-filter-controls">
+        <div class="lab-search-wrapper">
+          <input type="search" id="worlds-search-input" class="form-select-input search-input" placeholder="Search 50 worlds by name or star..." aria-label="Search exoplanets">
+        </div>
+        
+        <div class="filter-chips-container" role="region" aria-label="Category Filters">
+          <button class="filter-chip active" data-filter="all">All Worlds</button>
+          <button class="filter-chip" data-filter="Habitable Zone">Habitable Zone</button>
+          <button class="filter-chip" data-filter="Transit">Transit Method</button>
+          <button class="filter-chip" data-filter="Radial Velocity">Radial Velocity</button>
+          <button class="filter-chip" data-filter="Scorched">Scorched</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Exoplanet Card Grid Section -->
+    <section class="exoplanets-grid-section" aria-label="Exoplanet Catalog">
+      <div id="exoplanets-grid" class="planets-catalog-grid">
+        <!-- Dynamically injected via worlds-renderer.js -->
+      </div>
+
+      <!-- Loading / Empty Notice -->
+      <div id="worlds-loading-state" class="empty-state-card">
+        <div class="empty-icon pulse-animation" aria-hidden="true">🔭</div>
+        <h2>Scanning Deep Space Database...</h2>
+        <p>Loading catalog records and synthesizing procedural planetary optics.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Side-by-Side Comparison Modal -->
+  <dialog id="planet-compare-modal" class="space-modal">
+    <div class="modal-content-wrapper">
+      <button id="close-modal-btn" class="close-modal-icon" aria-label="Close comparison window">&times;</button>
+      
+      <div class="modal-header">
+        <h2 id="modal-planet-name">Planet Name</h2>
+        <span id="modal-planet-star" class="badge-neutral">Host Star</span>
+      </div>
+
+      <div class="comparison-display-grid">
+        <!-- Alien World Spec Box -->
+        <div class="comparison-column">
+          <h3>Exoplanet Telemetry</h3>
+          <div class="modal-canvas-wrapper">
+            <canvas id="modal-planet-canvas" width="160" height="160" aria-label="Procedural graphic of selected exoplanet"></canvas>
+          </div>
+          <ul class="telemetry-list">
+            <li><span>Radius:</span> <strong id="modal-radius">1.0 R⊕</strong></li>
+            <li><span>Distance:</span> <strong id="modal-distance">0 LY</strong></li>
+            <li><span>Equilibrium Temp:</span> <strong id="modal-temp">0 °C</strong></li>
+            <li><span>Discovery:</span> <strong id="modal-method">Transit</strong></li>
+          </ul>
+        </div>
+
+        <!-- Earth Baseline Spec Box -->
+        <div class="comparison-column baseline-earth">
+          <h3>Earth Baseline</h3>
+          <div class="modal-canvas-wrapper earth-canvas-wrap">
+            <canvas id="modal-earth-canvas" width="160" height="160" aria-label="Procedural graphic of Earth reference"></canvas>
+          </div>
+          <ul class="telemetry-list">
+            <li><span>Radius:</span> <strong>1.00 R⊕ (6,371 km)</strong></li>
+            <li><span>Distance:</span> <strong>0.0000156 LY</strong></li>
+            <li><span>Average Temp:</span> <strong>15 °C</strong></li>
+            <li><span>Biosphere:</span> <strong style="color: var(--habitability-green-glow);">Confirmed Active</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <p id="modal-planet-desc" class="modal-description-text">Description goes here...</p>
+
+      <div class="modal-footer-actions">
+        <button id="modal-send-builder-btn" class="primary-action-button">Send to Planet Builder</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="footer-content-wrapper">
+      <p>&copy; 2026 ExoLife: Beyond Our Sun. Made accessible for cosmic explorers everywhere.</p>
+      <p>Empowering public understanding of astrobiology through open web standards.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/exoplanets-fallback.js"></script>
+  <script src="assets/js/worlds-renderer.js"></script>
+</body>
+</html>

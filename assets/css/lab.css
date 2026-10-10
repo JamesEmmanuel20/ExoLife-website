@@ -1,0 +1,254 @@
+/* ===================================================================== */
+/* EXOLIFE: BEYOND OUR SUN - LAB DASHBOARD STYLES                        */
+/* ===================================================================== */
+
+.lab-main-container {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: var(--site-padding-block) var(--site-padding-inline);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  min-height: calc(100vh - 140px);
+}
+
+/* Hero Section & Actions Bar */
+.lab-hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--space-border-color);
+  padding-bottom: 1.5rem;
+}
+
+.lab-hero-content h1 {
+  font-size: var(--font-size-heading-1);
+  margin-bottom: 0.5rem;
+}
+
+.lab-hero-content p {
+  color: var(--text-color-secondary);
+  font-size: var(--font-size-body);
+  max-width: 600px;
+}
+
+.lab-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lab-search-wrapper {
+  flex-grow: 1;
+  min-width: 200px;
+}
+
+.search-input {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .lab-search-wrapper {
+    width: 100%;
+  }
+}
+
+.saved-counter {
+  background-color: rgba(56, 189, 248, 0.1);
+  color: var(--text-color-accent);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.danger-button {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--habitability-red-warning);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.danger-button:hover {
+  background-color: rgba(239, 68, 68, 0.2);
+  border-color: var(--habitability-red-warning);
+}
+
+/* Planets Grid & Cards */
+.planets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.75rem;
+}
+
+.planet-lab-card {
+  background-color: var(--space-surface-card);
+  border: 1px solid var(--space-border-color);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  backdrop-filter: blur(10px);
+  transition: var(--transition-smooth);
+}
+
+.planet-lab-card:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.15);
+}
+
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.planet-title-input {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-color-primary);
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-family: inherit;
+  padding: 0.25rem;
+  border-radius: 4px;
+  width: 100%;
+  transition: var(--transition-smooth);
+}
+
+.planet-title-input:hover,
+.planet-title-input:focus {
+  background-color: var(--space-background-primary);
+  border-color: var(--space-border-color);
+  outline: none;
+}
+
+.delete-planet-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-color-secondary);
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: 0.25rem;
+  transition: var(--transition-smooth);
+}
+
+.delete-planet-btn:hover {
+  color: var(--habitability-red-warning);
+}
+
+/* Planet Specs List */
+.planet-specs-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  background-color: var(--space-background-primary);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--space-border-color);
+}
+
+.planet-specs-list li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.planet-specs-list span {
+  color: var(--text-color-secondary);
+}
+
+.card-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+  margin-top: auto;
+}
+
+/* Empty State Card */
+.empty-state-card {
+  background-color: var(--space-surface-card);
+  border: 1px dashed var(--space-border-color);
+  border-radius: 12px;
+  padding: 4rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 650px;
+  margin: 2rem auto;
+}
+
+.empty-icon {
+  font-size: 3.5rem;
+}
+
+.empty-state-card h2 {
+  font-size: var(--font-size-heading-2);
+}
+
+.empty-state-card p {
+  color: var(--text-color-secondary);
+  max-width: 500px;
+  font-size: var(--font-size-body);
+}
+
+/* EXACT CODE SNIPPET TO PLACE AT THE BOTTOM OF assets/css/lab.css: */
+
+.planet-lab-card.clickable-card {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle glowing accent border on card hover */
+.planet-lab-card.clickable-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--text-color-accent), transparent);
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.planet-lab-card.clickable-card:hover::before {
+  opacity: 1;
+}
+
+.verdict-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-color-secondary);
+}
+
+/* Styled launch button on each card */
+.card-launch-btn {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  margin-top: auto;
+  text-align: center;
+  justify-content: center;
+  background-color: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.2);
+  color: var(--text-color-accent);
+}
+
+.planet-lab-card.clickable-card:hover .card-launch-btn {
+  background-color: var(--text-color-accent);
+  color: var(--space-background-primary);
+  border-color: var(--text-color-accent);
+}

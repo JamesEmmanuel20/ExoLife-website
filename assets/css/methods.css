@@ -1,0 +1,220 @@
+/* ===================================================================== */
+/* EXOLIFE: BEYOND OUR SUN - DETECTION METHODS HUB STYLES                 */
+/* ===================================================================== */
+
+.methods-main-container {
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding: var(--site-padding-block) var(--site-padding-inline);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.methods-hero-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.methods-hero-section h1 {
+  font-size: var(--font-size-heading-1);
+}
+
+.methods-hero-section p {
+  color: var(--text-color-secondary);
+  font-size: 1.1rem;
+}
+
+/* Methods Breakdown Grid */
+.methods-grid-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+}
+
+.method-info-card {
+  background-color: var(--space-surface-card);
+  border: 1px solid var(--space-border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: var(--transition-smooth);
+}
+
+.method-info-card:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(56, 189, 248, 0.15);
+}
+
+.method-icon {
+  font-size: 2.25rem;
+}
+
+.method-info-card h2 {
+  font-size: 1.25rem;
+}
+
+.method-info-card p {
+  color: var(--text-color-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Transit Laboratory Section */
+.transit-lab-section {
+  background-color: var(--space-surface-card);
+  border: 1px solid var(--space-border-color);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.lab-section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.transit-workbench {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 2rem;
+}
+
+.transit-controls-panel {
+  background-color: rgba(7, 9, 19, 0.4);
+  border: 1px solid var(--space-border-color);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.transit-controls-panel h3 {
+  font-size: 1.1rem;
+  border-bottom: 1px solid var(--space-border-color);
+  padding-bottom: 0.75rem;
+}
+
+.control-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.slider-label-row span {
+  color: var(--text-color-accent);
+  font-family: monospace;
+}
+
+.form-range-input {
+  width: 100%;
+  accent-color: var(--text-color-accent);
+  cursor: pointer;
+}
+
+.slider-hint {
+  font-size: 0.75rem;
+  color: var(--text-color-secondary);
+}
+
+.simulation-stats-box {
+  background-color: rgba(15, 22, 41, 0.6);
+  border: 1px solid var(--space-border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.simulation-stats-box h4 {
+  font-size: 0.85rem;
+  color: var(--text-color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.simulation-stats-box ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+  list-style: none;
+}
+
+.simulation-stats-box li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.simulation-stats-box strong {
+  color: var(--text-color-primary);
+  font-family: monospace;
+}
+
+.transit-visualizer-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.canvas-sub-box {
+  background-color: rgba(7, 9, 19, 0.6);
+  border: 1px solid var(--space-border-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.canvas-sub-box h4 {
+  font-size: 0.9rem;
+  color: var(--text-color-secondary);
+}
+
+.canvas-container {
+  background-color: var(--space-background-primary);
+  border-radius: 8px;
+  border: 1px solid var(--space-border-color);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas-container canvas {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .transit-workbench {
+    grid-template-columns: 1fr;
+  }
+}

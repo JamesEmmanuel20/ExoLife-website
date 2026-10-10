@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="James Emmanuel Yeboah-Asiamah">
+  <meta name="description" content="ExoLife Detection Methods – Learn how astronomers discover distant planets using transit photometry, radial velocity wobbles, and interactive light-curve simulations.">
+  <title>ExoLife: Beyond Our Sun | Detection Methods & Transit Lab</title>
+  
+  <!-- Global & Page-Specific Stylesheets -->
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/methods.css">
+</head>
+<body>
+
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="site-nav-container">
+      <a href="index.html" class="site-logo">
+        Exo<span>Life</span>
+      </a>
+      
+      <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="hamburger-icon" aria-hidden="true"></span>
+      </button>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links-list">
+          <li><a href="index.html" class="nav-link-item">Home</a></li>
+          <li><a href="calculator.html" class="nav-link-item">Planet Builder</a></li>
+          <li><a href="worlds.html" class="nav-link-item">Worlds Beyond</a></li>
+          <li><a href="astronomy-guide.html" class="nav-link-item">Astrobiology Guide</a></li>
+          <li><a href="methods.html" class="nav-link-item" aria-current="page">Detection Methods</a></li>
+          <li><a href="lab.html" class="nav-link-item">My Lab</a></li>
+          <li><a href="about.html" class="nav-link-item">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Methods Container -->
+  <main class="methods-main-container">
+    
+    <!-- Hero Section -->
+    <section class="methods-hero-section">
+      <h1>Cosmic Detective Work: Finding Exoplanets</h1>
+      <p>Because planets are millions of times fainter than their host stars, astronomers use ingenious physics and high-precision optics to detect them across light-years.</p>
+    </section>
+
+    <!-- Core Detection Methods Breakdown Grid -->
+    <section class="methods-grid-section" aria-label="Exoplanet Detection Techniques">
+      
+      <article class="method-info-card">
+        <div class="method-icon" aria-hidden="true">🌑</div>
+        <h2>1. Transit Photometry</h2>
+        <p>When a planet crosses (transits) directly in front of its star from our viewpoint, it blocks a tiny fraction of starlight. Telescopes measure this periodic dimming.</p>
+        <span class="badge-accent">Used by Kepler, TESS & JWST</span>
+      </article>
+
+      <article class="method-info-card">
+        <div class="method-icon" aria-hidden="true">〰️</div>
+        <h2>2. Radial Velocity</h2>
+        <p>A planet's gravity causes its host star to wobble slightly back and forth. This stellar wobble shifts the color of the star's light via the Doppler effect.</p>
+        <span class="badge-neutral">Measures Planetary Mass</span>
+      </article>
+
+      <article class="method-info-card">
+        <div class="method-icon" aria-hidden="true">📸</div>
+        <h2>3. Direct Imaging</h2>
+        <p>Using specialized starlight blockers called coronagraphs, telescopes blot out the blinding glare of a star to snap direct photographs of giant outer worlds.</p>
+        <span class="badge-neutral">Best for Young Gas Giants</span>
+      </article>
+
+      <article class="method-info-card">
+        <div class="method-icon" aria-hidden="true">🔍</div>
+        <h2>4. Gravitational Microlensing</h2>
+        <p>Einstein’s theory of relativity shows that massive objects bend starlight. When a foreground star and planet pass in front of a distant background star, they act like a cosmic magnifying glass.</p>
+        <span class="badge-neutral">Finds Distant Rogue Worlds</span>
+      </article>
+
+    </section>
+
+    <!-- Interactive Transit Simulator Lab Section -->
+    <section class="transit-lab-section">
+      <div class="lab-section-header">
+        <h2>Interactive Transit Laboratory</h2>
+        <p>Experiment with planet size and orbital speed below. Watch how the transit animation coordinates in real-time with the continuous light-curve waveform!</p>
+      </div>
+
+      <div class="transit-workbench">
+        <!-- Controls Panel -->
+        <div class="transit-controls-panel">
+          <h3>Simulation Parameters</h3>
+          
+          <div class="control-slider-group">
+            <div class="slider-label-row">
+              <label for="planet-size-slider">Planet Radius ($R_p$):</label>
+              <span id="planet-size-val">1.2 $R_\oplus$</span>
+            </div>
+            <input type="range" id="planet-size-slider" min="0.6" max="3.0" step="0.1" value="1.2" class="form-range-input">
+            <span class="slider-hint">Larger planets block more starlight, creating deeper dips.</span>
+          </div>
+
+          <div class="control-slider-group">
+            <div class="slider-label-row">
+              <label for="orbit-speed-slider">Orbital Velocity / Frequency:</label>
+              <span id="orbit-speed-val">1.0x</span>
+            </div>
+            <input type="range" id="orbit-speed-slider" min="0.4" max="2.5" step="0.1" value="1.0" class="form-range-input">
+            <span class="slider-hint">Controls how fast the planet orbits and how frequently dips occur.</span>
+          </div>
+
+          <div class="simulation-stats-box">
+            <h4>Live Telemetry</h4>
+            <ul>
+              <li><span>Flux Dimming Depth:</span> <strong id="stat-depth">1.44%</strong></li>
+              <li><span>Transit Frequency:</span> <strong id="stat-frequency">Standard</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Visualizers Output Panel -->
+        <div class="transit-visualizer-panel">
+          
+          <!-- Canvas 1: Star & Crossing Planet Animation -->
+          <div class="canvas-sub-box">
+            <h4>Stellar Transit View</h4>
+            <div class="canvas-container">
+              <canvas id="transit-animation-canvas" width="480" height="180" aria-label="Animation of exoplanet crossing star disk"></canvas>
+            </div>
+          </div>
+
+          <!-- Canvas 2: Continuous Light Curve Wave -->
+          <div class="canvas-sub-box">
+            <h4>Continuous Light Curve (Brightness vs. Time)</h4>
+            <div class="canvas-container">
+              <canvas id="light-curve-canvas" width="480" height="180" aria-label="Continuous waveform graph showing periodic transit brightness dips"></canvas>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="footer-content-wrapper">
+      <p>&copy; 2026 ExoLife: Beyond Our Sun. Made accessible for cosmic explorers everywhere.</p>
+      <p>Empowering public understanding of astrobiology through open web standards.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/methods-simulator.js"></script>
+</body>
+</html>
