@@ -69,6 +69,35 @@
   line-height: 1.6;
 }
 
+/* Deep Dive Mission Section */
+.about-deep-dive-section {
+  width: 100%;
+}
+
+.deep-dive-card {
+  background-color: var(--space-surface-card);
+  border: 1px solid var(--space-border-color);
+  border-radius: 20px;
+  padding: 3rem;
+  backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  border-left: 4px solid var(--text-color-accent);
+}
+
+.deep-dive-card h2 {
+  font-size: 1.5rem;
+  color: var(--text-color-primary);
+}
+
+.deep-dive-card p {
+  color: var(--text-color-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
 /* Creator Profile Section */
 .creator-profile-section {
   display: flex;
